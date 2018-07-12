@@ -27,10 +27,8 @@ public class SubjectLabelServiceImpl implements ISubjectLabelService
 
     public List<SubjectLabel> findByName(String name){
         List<SubjectLabel> subjectLabelList1 = subjectLabelRepository.findByName1(name);
-        List<SubjectLabel> subjectLabelList2 = subjectLabelRepository.findByName2(name);
         List<SubjectLabel> subjectLabelList3 = subjectLabelRepository.findByNameAndUserId(name, "");
         System.out.println("subjectLabel1:" + subjectLabelList1);
-        System.out.println("subjectLabel2:" + subjectLabelList2);
         System.out.println("subjectLabel3:" + subjectLabelList3);
 
         return subjectLabelRepository.findByName(name);
