@@ -17,8 +17,6 @@ public class SubjectLabelController
     @Autowired
     private ISubjectLabelService subjectLabelService;
 
-    private String dateNowStr;
-
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public SubjectLabel addSubjectLabel(
             @RequestParam(value = "name") String name,
@@ -39,10 +37,10 @@ public class SubjectLabelController
 
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        this.dateNowStr = dateFormat.format(date);
+        String dateNowStr = dateFormat.format(date);
 
-        subjectLabel.setCreatedAt(this.dateNowStr);
-        subjectLabel.setUpdatedAt(this.dateNowStr);
+        subjectLabel.setCreatedAt(dateNowStr);
+        subjectLabel.setUpdatedAt(dateNowStr);
         subjectLabelService.saveSubjectLabel(subjectLabel);
 
         return subjectLabel;
