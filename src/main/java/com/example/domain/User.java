@@ -6,7 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
+@Table(name = "user")
 @Entity
 @NamedQuery(name = "User.findByName", query = "select name,address from User u where u.name=?1")
 public class User implements Serializable

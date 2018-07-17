@@ -39,7 +39,7 @@ public class SubjectLabelServiceImpl implements ISubjectLabelService
         subjectLabelJpaRepository.save(subjectLabel);
     }
 
-    @Cacheable("SubjectLabel")
+    @Cacheable(value = "SubjectLabel#2#1", key = "#id")
     public SubjectLabel findOne(long id)
     {
         System.out.println("Cached Pages");
