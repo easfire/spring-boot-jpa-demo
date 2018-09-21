@@ -1,8 +1,8 @@
 package com.example.web;
 
 import com.example.domain.SubjectLabel;
-import com.example.domain.User;
 import com.example.service.ISubjectLabelService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +12,7 @@ import javax.persistence.PersistenceUnit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -73,7 +74,21 @@ public class SubjectLabelController
 
     @RequestMapping(value = "/list")
     public List<SubjectLabel> getSubjectLabel(){
-        return subjectLabelService.findAll();
+        List<SubjectLabel> list = subjectLabelService.findAll();
+        System.out.println(list);
+
+        for (SubjectLabel item : list){
+            System.out.println(item);
+        }
+
+
+        ObjectMapper oMapper = new ObjectMapper();
+
+        for (SubjectLabel item : list){
+            Map<String, Object> map = oMapper.convertValue(item, Map.class);
+            System.out.println(map);
+        }
+        return list;
     }
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
@@ -85,6 +100,7 @@ public class SubjectLabelController
     @RequestMapping(value = "/search/name", method = RequestMethod.GET)
     public List<SubjectLabel> getSubjectLabelByName(@RequestParam(value = "name") String name){
         List<SubjectLabel> subjectLabelList = subjectLabelService.findByName(name);
+        System.out.println(subjectLabelList);
         return subjectLabelList;
     }
 
@@ -94,6 +110,7 @@ public class SubjectLabelController
         List arrJoin = em.createQuery("select s.id, u.name, u.address from SubjectLabel s, User u " +
                 "where s.userId=u.id")
                         .getResultList();
+        System.out.println("out is " + arrJoin);
         return arrJoin;
     }
 }
